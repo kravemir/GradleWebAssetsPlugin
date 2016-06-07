@@ -13,6 +13,7 @@ public class WebAssetsSet {
     private String[] registerInSourceSets = new String[0];
 
     private Closure sassClosure;
+    private Closure soyClosure;
 
     public WebAssetsSet(String name) {
         this.name = name;
@@ -52,5 +53,11 @@ public class WebAssetsSet {
 
     public Closure getSassClosure() {
         return sassClosure;
+    }
+
+    public void soy(Closure closure) { this.soyClosure = closure; }
+
+    public Closure getSoyClosure() {
+        return soyClosure;
     }
 }

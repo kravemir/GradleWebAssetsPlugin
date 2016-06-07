@@ -13,12 +13,14 @@ buildscript {
 apply plugin: 'org.kravemir.gradle.webassets'
 
 webAssets {
-    release {
-        minify = true
-
+    main {
         sass {
             srcDir = file("$projectDir/src/main/sass")
             outDir = file("$projectDir/build/css")
+        }
+        soy {
+            inputDir = "$projectDir/src/main/templates"
+            outputFile = "$projectDir/build/js/templates.js"
         }
     }
 }

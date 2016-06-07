@@ -27,6 +27,14 @@ public class WebAssetsPlugin implements Plugin<Project> {
                         })
                 );
             }
+
+            if(build.getSoyClosure() != null) {
+                String taskName = build.getName() + "Soy";
+                assetsTask.dependsOn(project.getTasks().create(taskName, SoyCompileTask.class, t -> {
+                    t.setGroup("webAssets");
+                    project.configure(t, build.getSoyClosure());
+                }));
+            }
         }));
     }
 }
