@@ -8,7 +8,10 @@ public class WebAssetsSet {
 
     private final String name;
 
-    private File baseDir;
+    private File baseSrcDir;
+    private File baseOutDir;
+
+
     private boolean minify = false;
     private String[] registerInSourceSets = new String[0];
 
@@ -23,12 +26,20 @@ public class WebAssetsSet {
         return name;
     }
 
-    public File getBaseDir() {
-        return baseDir;
+    public File getBaseSrcDir() {
+        return baseSrcDir;
     }
 
-    public void setBaseDir(File baseDir) {
-        this.baseDir = baseDir;
+    public void setBaseSrcDir(File baseSrcDir) {
+        this.baseSrcDir = baseSrcDir;
+    }
+
+    public File getBaseOutDir() {
+        return baseOutDir;
+    }
+
+    public void setBaseOutDir(File baseOutDir) {
+        this.baseOutDir = baseOutDir;
     }
 
     public boolean getMinify() {

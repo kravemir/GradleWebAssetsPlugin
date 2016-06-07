@@ -29,7 +29,7 @@ public class WebAssetsSassBuildConfiguration implements SassBuildConfiguration {
     @Override
     public File getSrcDir() {
         if(srcDir == null)
-            return assetsSet.getBaseDir();
+            return assetsSet.getBaseSrcDir();
         return srcDir;
     }
 

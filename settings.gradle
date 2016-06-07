@@ -1,2 +1,3 @@
 include ':plugin'
 include ':examples:01-HelloWebAssets'
+include ':examples:03-JavaResources'

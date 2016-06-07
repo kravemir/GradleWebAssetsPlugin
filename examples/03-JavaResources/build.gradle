@@ -1,0 +1,39 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath 'org.kravemir.gradle.webassets:GradleWebAssetsPlugin:0.1.1-SNAPSHOT'
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'org.kravemir.gradle.webassets'
+
+webAssets {
+    main {
+        sass {
+            srcDir = file("$projectDir/src/main/sass")
+            outDir = file("$projectDir/build/generated/resources/css")
+        }
+        soy {
+            inputDir = "$projectDir/src/main/templates"
+            outputFile = "$projectDir/build/generated/resources/js/templates.js"
+        }
+
+        baseOutDir = file("$projectDir/build/generated/resources")
+
+        registerInSourceSets = [ 'main' ]
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
