@@ -1,24 +1,27 @@
 package org.kravemir.gradle.webassets;
 
 import groovy.lang.Closure;
+import org.gradle.api.GradleException;
+import org.gradle.api.Project;
 
 import java.io.File;
 
 public class WebAssetsSet {
 
+    private final Project project;
     private final String name;
 
     private File baseSrcDir;
     private File baseOutDir;
 
-
     private boolean minify = false;
     private String[] registerInSourceSets = new String[0];
 
-    private Closure sassClosure;
+    private WebAssetsSassBuildConfiguration sassBuildConfiguration;
     private Closure soyClosure;
 
-    public WebAssetsSet(String name) {
+    public WebAssetsSet(Project project, String name) {
+        this.project = project;
         this.name = name;
     }
 
@@ -34,9 +37,13 @@ public class WebAssetsSet {
         this.baseSrcDir = baseSrcDir;
     }
 
+    public void setBaseSrcDir(String filename) { setBaseSrcDir(project.file(filename));}
+
     public File getBaseOutDir() {
         return baseOutDir;
     }
+
+    public void setBaseOutDir(String filename) { setBaseOutDir(project.file(filename));}
 
     public void setBaseOutDir(File baseOutDir) {
         this.baseOutDir = baseOutDir;
@@ -59,16 +66,23 @@ public class WebAssetsSet {
     }
 
     public void sass(Closure closure) {
-        this.sassClosure = closure;
+        if(sassBuildConfiguration != null)
+            throw new GradleException(String.format("SASS has already been defined for %s resourceSet", name));
+        sassBuildConfiguration = new WebAssetsSassBuildConfiguration(this);
+        project.configure(sassBuildConfiguration, closure);
     }
 
-    public Closure getSassClosure() {
-        return sassClosure;
+    public WebAssetsSassBuildConfiguration getSassBuildConfiguration() {
+        return sassBuildConfiguration;
     }
 
     public void soy(Closure closure) { this.soyClosure = closure; }
 
     public Closure getSoyClosure() {
         return soyClosure;
+    }
+
+    public Project getProject() {
+        return project;
     }
 }

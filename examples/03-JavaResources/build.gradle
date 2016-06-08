@@ -18,11 +18,11 @@ webAssets {
         sass {}
         soy {
             inputDir = "$projectDir/src/main/templates"
-            outputFile = "$projectDir/build/generated/resources/js/templates.js"
+            outputFile = "$buildDir/generated/resources/js/templates.js"
         }
 
-        baseSrcDir = file("$projectDir/src/main/")
-        baseOutDir = file("$projectDir/build/generated/resources")
+        baseSrcDir = "$projectDir/src/main/"
+        baseOutDir = "$buildDir/generated/resources"
 
         registerInSourceSets = [ 'main' ]
     }

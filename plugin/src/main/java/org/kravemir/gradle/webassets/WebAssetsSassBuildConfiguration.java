@@ -21,7 +21,7 @@ public class WebAssetsSassBuildConfiguration implements SassBuildConfiguration {
     }
 
     @Override
-    public File getBuildDir() {
+    public File getBuildOutDir() {
         if(outSubDir == null && outDir == null)
             return Paths.get(getOutDir().getPath(), "css").toFile();
         if(outSubDir == null)
@@ -42,6 +42,10 @@ public class WebAssetsSassBuildConfiguration implements SassBuildConfiguration {
         this.srcDir = srcDir;
     }
 
+    public void setSrcDir(String srcDir) {
+        setSrcDir(assetsSet.getProject().file(srcDir));
+    }
+
     public File getOutDir() {
         if(outDir == null)
             return assetsSet.getBaseOutDir();
@@ -50,6 +54,10 @@ public class WebAssetsSassBuildConfiguration implements SassBuildConfiguration {
 
     public void setOutDir(File outDir) {
         this.outDir = outDir;
+    }
+
+    public void setOutDir(String outDir) {
+        setOutDir(assetsSet.getProject().file(outDir));
     }
 
     @Override

@@ -15,12 +15,12 @@ apply plugin: 'org.kravemir.gradle.webassets'
 webAssets {
     main {
         sass {
-            srcDir = file("$projectDir/src/main/sass")
-            outDir = file("$projectDir/build/css")
+            srcDir = "$projectDir/src/main/sass"
+            outDir = "$buildDir/css"
         }
         soy {
             inputDir = "$projectDir/src/main/templates"
-            outputFile = "$projectDir/build/js/templates.js"
+            outputFile = "$buildDir/js/templates.js"
         }
     }
 }
