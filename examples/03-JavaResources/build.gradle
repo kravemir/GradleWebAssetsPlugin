@@ -6,7 +6,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'org.kravemir.gradle.webassets:GradleWebAssetsPlugin:0.1.1-SNAPSHOT'
+        classpath 'org.kravemir.gradle.webassets:GradleWebAssetsPlugin:0.1.2-SNAPSHOT'
     }
 }
 

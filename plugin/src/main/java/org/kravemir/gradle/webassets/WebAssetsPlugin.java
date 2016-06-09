@@ -2,7 +2,6 @@ package org.kravemir.gradle.webassets;
 
 import org.gradle.api.*;
 import org.gradle.api.plugins.JavaPluginConvention;
-import org.kravemir.gradle.sass.SassCompileTask;
 
 import java.util.Collections;
 
@@ -19,12 +18,8 @@ public class WebAssetsPlugin implements Plugin<Project> {
             DefaultTask assetsTask = project.getTasks().create(build.getName() + "WebAssets", DefaultTask.class);
             assetsTask.setGroup("webAssets");
 
-            if(build.getSassBuildConfiguration() != null) {
-                String taskName = build.getName() + "Sass";
-                assetsTask.dependsOn(project.getTasks().create(taskName, SassCompileTask.class, t -> {
-                    t.setGroup("webAssets");
-                    t.setConfiguration(build.getSassBuildConfiguration());
-                }));
+            if(build.getSassCompileTask() != null) {
+                assetsTask.dependsOn(build.getSassCompileTask());
             }
 
             if(build.getSoyClosure() != null) {
@@ -38,7 +33,6 @@ public class WebAssetsPlugin implements Plugin<Project> {
             registerInSourceSets(project,build,assetsTask);
         }));
     }
-
 
     private void registerInSourceSets(Project project, WebAssetsSet build, Task task) {
         if(build.getRegisterInSourceSets() == null || build.getRegisterInSourceSets().length == 0) return;

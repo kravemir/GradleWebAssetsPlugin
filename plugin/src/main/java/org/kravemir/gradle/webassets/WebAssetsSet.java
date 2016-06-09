@@ -17,7 +17,7 @@ public class WebAssetsSet {
     private boolean minify = false;
     private String[] registerInSourceSets = new String[0];
 
-    private WebAssetsSassBuildConfiguration sassBuildConfiguration;
+    private SassCompileTask sassCompileTask;
     private Closure soyClosure;
 
     public WebAssetsSet(Project project, String name) {
@@ -66,14 +66,19 @@ public class WebAssetsSet {
     }
 
     public void sass(Closure closure) {
-        if(sassBuildConfiguration != null)
+        if(sassCompileTask != null)
             throw new GradleException(String.format("SASS has already been defined for %s resourceSet", name));
-        sassBuildConfiguration = new WebAssetsSassBuildConfiguration(this);
-        project.configure(sassBuildConfiguration, closure);
+        sassCompileTask = getProject().getTasks().create(
+                name + "Sass",
+                SassCompileTask.class
+        );
+        sassCompileTask.setAssetsSet(this);
+        sassCompileTask.setGroup("webAssets");
+        project.configure(sassCompileTask, closure);
     }
 
-    public WebAssetsSassBuildConfiguration getSassBuildConfiguration() {
-        return sassBuildConfiguration;
+    public SassCompileTask getSassCompileTask() {
+        return sassCompileTask;
     }
 
     public void soy(Closure closure) { this.soyClosure = closure; }

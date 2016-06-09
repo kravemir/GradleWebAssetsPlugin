@@ -1,12 +1,13 @@
 package org.kravemir.gradle.webassets;
 
-import org.kravemir.gradle.sass.api.SassBuildConfiguration;
+import org.kravemir.gradle.sass.AbstractSassCompileTask;
 
 import java.io.File;
 import java.nio.file.Paths;
 
-public class WebAssetsSassBuildConfiguration implements SassBuildConfiguration {
-    private final WebAssetsSet assetsSet;
+public class SassCompileTask extends AbstractSassCompileTask {
+
+    private WebAssetsSet assetsSet;
 
     private File srcDir = null;
     private File outDir = null;
@@ -16,12 +17,8 @@ public class WebAssetsSassBuildConfiguration implements SassBuildConfiguration {
     private String exclude = null;
     private Boolean minify = null;
 
-    public WebAssetsSassBuildConfiguration(WebAssetsSet assetsSet) {
-        this.assetsSet = assetsSet;
-    }
-
     @Override
-    public File getBuildOutDir() {
+    public File getOutputDirectory() {
         if(outSubDir == null && outDir == null)
             return Paths.get(getOutDir().getPath(), "css").toFile();
         if(outSubDir == null)
@@ -83,5 +80,9 @@ public class WebAssetsSassBuildConfiguration implements SassBuildConfiguration {
 
     public void setExclude(String exclude) {
         this.exclude = exclude;
+    }
+
+    public void setAssetsSet(WebAssetsSet assetsSet) {
+        this.assetsSet = assetsSet;
     }
 }
