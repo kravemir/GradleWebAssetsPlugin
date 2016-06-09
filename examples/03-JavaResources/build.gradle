@@ -6,7 +6,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'org.kravemir.gradle.webassets:GradleWebAssetsPlugin:0.1.2-SNAPSHOT'
+        classpath 'org.kravemir.gradle.webassets:GradleWebAssetsPlugin:0.1.4-SNAPSHOT'
     }
 }
 
@@ -24,7 +24,7 @@ webAssets {
         baseSrcDir = "$projectDir/src/main/"
         baseOutDir = "$buildDir/generated/resources"
 
-        registerInSourceSets = [ 'main' ]
+        registerInSourceSets ( 'main' )
     }
 }
 

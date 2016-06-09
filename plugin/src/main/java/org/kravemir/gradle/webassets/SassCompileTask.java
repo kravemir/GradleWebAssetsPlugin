@@ -7,7 +7,7 @@ import java.nio.file.Paths;
 
 public class SassCompileTask extends AbstractSassCompileTask {
 
-    private WebAssetsSet assetsSet;
+    private WebAssetsTask assetsSet;
 
     private File srcDir = null;
     private File outDir = null;
@@ -82,7 +82,7 @@ public class SassCompileTask extends AbstractSassCompileTask {
         this.exclude = exclude;
     }
 
-    public void setAssetsSet(WebAssetsSet assetsSet) {
+    public void setAssetsSet(WebAssetsTask assetsSet) {
         this.assetsSet = assetsSet;
     }
 }

@@ -13,7 +13,7 @@ apply plugin: 'java'
 apply plugin: 'maven'
 
 group 'org.kravemir.gradle.webassets'
-version '0.1.2-SNAPSHOT'
+version '0.1.4-SNAPSHOT'
 
 sourceCompatibility = 1.8
 
